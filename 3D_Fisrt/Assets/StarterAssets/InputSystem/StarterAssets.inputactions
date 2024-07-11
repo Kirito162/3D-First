@@ -76,6 +76,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Target",
+                    "type": "Button",
+                    "id": "0ce8dd06-5291-460c-824c-ced2b4b6c339",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CancleTarget",
+                    "type": "Button",
+                    "id": "894d101d-9aa1-4d48-b4b8-27ac089a5d25",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -258,7 +276,7 @@
                 {
                     "name": "",
                     "id": "78804b27-ad53-4c9f-9945-a73472763e29",
-                    "path": "<Keyboard>/f",
+                    "path": "<Keyboard>/g",
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardMouse",
@@ -296,6 +314,28 @@
                     "processors": "",
                     "groups": "KeyboardMouse",
                     "action": "Skill_3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3f216d30-ffe1-405b-852f-9853c04f499d",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "Target",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "be2a993b-a52f-458b-a14d-4b368c821f6d",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "CancleTarget",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

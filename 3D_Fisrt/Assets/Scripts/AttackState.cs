@@ -6,6 +6,8 @@ using UnityEngine;
 public class AttackState : StateMachineBehaviour
 {
     Transform player;
+    
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -27,4 +29,5 @@ public class AttackState : StateMachineBehaviour
     {
 
     }
+    
 }

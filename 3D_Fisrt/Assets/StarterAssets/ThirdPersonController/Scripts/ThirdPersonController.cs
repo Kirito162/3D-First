@@ -107,7 +107,9 @@ namespace StarterAssets
         private GameObject _mainCamera;
         public GameObject _bullet;
         public Transform _bulletPoint;
-        public float forceSkill1;
+
+        public EnemyDetection enemyDetection;
+        public float rotationSpeed = 5f;  // Tốc độ quay mặt của player
 
         private const float _threshold = 0.01f;
 
@@ -164,6 +166,8 @@ namespace StarterAssets
             Move();
             Play();
             Skill1();
+            Target();
+            //CancleTarget();
         }
 
         void Play() 
@@ -193,8 +197,9 @@ namespace StarterAssets
         public void Shoot_1()
         {
             GameObject bullet = Instantiate(_bullet, _bulletPoint.position, transform.rotation);
-            bullet.GetComponent<Rigidbody>().AddForce(transform.forward * forceSkill1, ForceMode.Impulse);   
+            //bullet.GetComponent<Rigidbody>().AddForce(transform.forward * forceSkill1, ForceMode.Impulse);   
         }
+
         public void DisableInput()
         {
             _playerInput.SwitchCurrentActionMap("OffInput");
@@ -203,6 +208,36 @@ namespace StarterAssets
         {
             _playerInput.SwitchCurrentActionMap("Player");
         }
+
+        void Target()
+        {
+            if (_input.target && Grounded)
+            {
+
+                Transform target = enemyDetection.GetClosestEnemyInView();
+                if (target != null)
+                {
+                    Vector3 direction = (target.position - transform.position).normalized;
+                    Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+                    transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+                }
+                
+            }
+            if (_input.move != Vector2.zero)
+            {
+                _input.target = false;
+            }
+            
+        }
+        /*void CancleTarget()
+        {
+            if (_input.cancleTarget)
+            {
+                _input.target = false;
+                _input.cancleTarget = false;
+            }
+        }*/
+
         private void LateUpdate()
         {
             CameraRotation();

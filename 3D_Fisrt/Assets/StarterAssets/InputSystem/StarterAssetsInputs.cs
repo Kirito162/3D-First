@@ -16,7 +16,8 @@ namespace StarterAssets
 		public bool skill1;
 		public bool skill2;
         public bool skill3;
-
+		public bool target;
+		public bool cancleTarget;
         [Header("Movement Settings")]
 		public bool analogMovement;
 
@@ -52,6 +53,14 @@ namespace StarterAssets
 		{
 			SprintInput(value.isPressed);
 		}
+        public void OnTarget(InputValue value)
+        {
+            TargetInput(value.isPressed);
+        }
+        public void OnCancleTarget(InputValue value)
+        {
+            CancleTargetInput(value.isPressed);
+        }
         public void OnSkill_1(InputValue value)
         {
             Skill_1Input(value.isPressed);
@@ -87,6 +96,14 @@ namespace StarterAssets
         public void Skill_1Input(bool newSkill1State)
         {
             skill1 = newSkill1State;
+        }
+        public void TargetInput(bool newTarget)
+        {
+            target = newTarget;
+        }
+        public void CancleTargetInput(bool newCancleTarget)
+        {
+            cancleTarget = newCancleTarget;
         }
         private void OnApplicationFocus(bool hasFocus)
 		{
