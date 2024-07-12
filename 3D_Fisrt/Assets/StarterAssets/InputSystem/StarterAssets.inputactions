@@ -297,6 +297,17 @@
                 },
                 {
                     "name": "",
+                    "id": "0de7ab46-d42f-46fe-a47a-448db0909fa4",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Skill_1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "70a5ca52-b7f9-40ca-b19a-ff6825f5be9f",
                     "path": "<Keyboard>/e",
                     "interactions": "",
@@ -324,6 +335,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardMouse",
+                    "action": "Target",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "329a1c5a-98c3-40cd-9880-c358d82de421",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
                     "action": "Target",
                     "isComposite": false,
                     "isPartOfComposite": false
