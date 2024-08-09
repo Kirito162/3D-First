@@ -44,11 +44,6 @@ namespace StarterAssets
 			JumpInput(value.isPressed);
 		}
 
-        public void OnPlay(InputValue value)
-        {
-            PlayInput(value.isPressed);
-        }
-
         public void OnSprint(InputValue value)
 		{
 			SprintInput(value.isPressed);
@@ -64,6 +59,10 @@ namespace StarterAssets
         public void OnSkill_1(InputValue value)
         {
             Skill_1Input(value.isPressed);
+        }
+        public void OnSkill_2(InputValue value)
+        {
+            Skill_2Input(value.isPressed);
         }
 #endif
 
@@ -88,9 +87,9 @@ namespace StarterAssets
 			sprint = newSprintState;
 		}
 
-        public void PlayInput(bool newPlayState)
+        public void Skill_2Input(bool newSkill2State)
         {
-            play = newPlayState;
+            skill2 = newSkill2State;
         }
 
         public void Skill_1Input(bool newSkill1State)

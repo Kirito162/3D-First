@@ -64,7 +64,7 @@ public class MotionChanger : MonoBehaviour
 			m_ChangingMotion = false;
 			m_PrevState = m_Animator.GetCurrentAnimatorStateInfo(0);
 		}
-		else
+		/*else
 		{
 			// モーション変更
 			if( Input.GetKeyDown( KeyCode.LeftArrow ) )
@@ -78,14 +78,14 @@ public class MotionChanger : MonoBehaviour
 		}
 
 		// 終了
-		if( Input.GetKeyDown( KeyCode.Escape ) ) Application.Quit();
+		if( Input.GetKeyDown( KeyCode.Escape ) ) Application.Quit();*/
 	}
 
 	/*!
 	 *	----------------------------------------------------------------------
 	 *	@brief	アニメーション次へ
 	*/
-	private void NextAnimation()
+	public void NextAnimation()
 	{
 		if( m_ChangingMotion ) return;
 
@@ -99,7 +99,7 @@ public class MotionChanger : MonoBehaviour
 	 *	----------------------------------------------------------------------
 	 *	@brief	アニメーション前へ
 	*/
-	private void PrevAnimation()
+	public void PrevAnimation()
 	{
 		if( m_ChangingMotion ) return;
 
@@ -118,7 +118,7 @@ public class MotionChanger : MonoBehaviour
 	 *	----------------------------------------------------------------------
 	 *	@brief	ボタン表示
 	*/
-	private void OnGUI()
+	/*private void OnGUI()
 	{
 		GUIStyle tempStyle = GUI.skin.box;
 		tempStyle.fontSize = 24;
@@ -143,7 +143,7 @@ public class MotionChanger : MonoBehaviour
 		{
 			NextAnimation();
 		}
-	}
+	}*/
 
 
 }

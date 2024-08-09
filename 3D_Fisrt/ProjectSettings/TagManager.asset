@@ -6,8 +6,8 @@ TagManager:
   tags:
   - CinemachineTarget
   - WayPoints
+  - Enemy
   - Dragon
-  - HitDragon
   layers:
   - Default
   - TransparentFX
@@ -15,14 +15,14 @@ TagManager:
   - Land
   - Water
   - UI
-  - Enemy
+  - Dragon
+  - Player
+  - Golin
   - 
   - 
   - 
   - 
-  - 
-  - 
-  - 
+  - MiniMap
   - 
   - 
   - 

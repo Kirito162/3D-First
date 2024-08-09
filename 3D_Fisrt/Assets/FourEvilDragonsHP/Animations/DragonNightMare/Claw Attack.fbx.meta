@@ -500,7 +500,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -516,7 +516,7 @@ ModelImporter:
       - time: 0.4903267
         functionName: Claw
         data: 
-        objectReferenceParameter: {fileID: 11500000, guid: 20c3d942b2e6a7b498ad1ebdf27ecc4a, type: 3}
+        objectReferenceParameter: {fileID: 11500000, guid: 611af478128c5174299df65a12fc1980, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0

@@ -25,6 +25,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chaseRange: 8
+  tag: Dragon
 --- !u!1102 &-8172809460484769135
 AnimatorState:
   serializedVersion: 6

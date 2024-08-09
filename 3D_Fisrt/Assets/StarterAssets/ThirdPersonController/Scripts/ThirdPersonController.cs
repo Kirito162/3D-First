@@ -1,4 +1,5 @@
-﻿ using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
 #endif
@@ -8,7 +9,6 @@ using UnityEngine.InputSystem;
 
 namespace StarterAssets
 {
-    [RequireComponent(typeof(CharacterController))]
 #if ENABLE_INPUT_SYSTEM 
     [RequireComponent(typeof(PlayerInput))]
 #endif
@@ -105,8 +105,11 @@ namespace StarterAssets
         private CharacterController _controller;
         private StarterAssetsInputs _input;
         private GameObject _mainCamera;
-        public GameObject _bullet;
+        public GameObject _bullet1;
+        public GameObject _bullet2;
         public Transform _bulletPoint;
+        private bool canInput = true;
+
 
         public EnemyDetection enemyDetection;
         public float rotationSpeed = 5f;  // Tốc độ quay mặt của player
@@ -161,24 +164,31 @@ namespace StarterAssets
         {
             _hasAnimator = TryGetComponent(out _animator);
 
-            JumpAndGravity();
-            GroundedCheck();
-            Move();
-            Play();
-            Skill1();
-            Target();
+            
+            if (canInput)
+            {
+                JumpAndGravity();
+                GroundedCheck();
+                Move();
+                Skill1();
+                Skill2();
+                Target();
+            }
+            
             //CancleTarget();
         }
 
-        void Play() 
+
+        void Skill2() 
         {
-            if (_input.play && Grounded && !_input.sprint)
+            if (_input.skill2 && Grounded && !_input.sprint)
             {
                 if (_hasAnimator)
                 {
                     //_animator.Play("mixamo_com");
-                    _animator.SetTrigger("Play2");
-                    _input.play = false;
+                    _animator.SetTrigger("Skill_2");
+                    _input.skill2 = false;
+                    DisableInput();
                 }
             }
         }
@@ -191,22 +201,32 @@ namespace StarterAssets
                     //_animator.Play("mixamo_com");
                     _animator.SetTrigger("Skill_1");
                     _input.skill1 = false;
+                    DisableInput();
                 }
             }
         }
         public void Shoot_1()
         {
-            GameObject bullet = Instantiate(_bullet, _bulletPoint.position, transform.rotation);
+            GameObject bullet = Instantiate(_bullet1, _bulletPoint.position, transform.rotation);
+            //bullet.GetComponent<Rigidbody>().AddForce(transform.forward * forceSkill1, ForceMode.Impulse);   
+        }
+        public void Shoot_2()
+        {
+            GameObject bullet = Instantiate(_bullet2, transform.position, transform.rotation);
             //bullet.GetComponent<Rigidbody>().AddForce(transform.forward * forceSkill1, ForceMode.Impulse);   
         }
 
         public void DisableInput()
         {
-            _playerInput.SwitchCurrentActionMap("OffInput");
+            //_playerInput.SwitchCurrentActionMap("OffInput");
+            canInput = false;
+            //_input.move = Vector2.zero;
+            
         }
         public void EnableInput()
         {
-            _playerInput.SwitchCurrentActionMap("Player");
+            //_playerInput.SwitchCurrentActionMap("Player");
+            canInput = true;
         }
 
         void Target()
@@ -290,6 +310,8 @@ namespace StarterAssets
 
         private void Move()
         {
+
+
             // set target speed based on move speed, sprint speed and if sprint is pressed
             float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
 

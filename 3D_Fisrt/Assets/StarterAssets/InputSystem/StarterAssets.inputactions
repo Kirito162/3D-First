@@ -52,7 +52,7 @@
                 },
                 {
                     "name": "Skill_1",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "47a311b4-1afa-487e-ac07-f943e72ea904",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -61,7 +61,7 @@
                 },
                 {
                     "name": "Skill_2",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "15293e3a-56dc-43df-aa02-9c62046bb0d2",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -70,7 +70,7 @@
                 },
                 {
                     "name": "Skill_3",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "cbead8ce-da86-475b-9f44-0d63590c8a49",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -79,7 +79,7 @@
                 },
                 {
                     "name": "Target",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "0ce8dd06-5291-460c-824c-ced2b4b6c339",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -198,10 +198,10 @@
                 },
                 {
                     "name": "",
-                    "id": "e2f9aa65-db06-4c5b-a2e9-41bc8acb9517",
+                    "id": "54065229-ae44-48d8-a36c-0373d8be0408",
                     "path": "<Gamepad>/leftStick",
                     "interactions": "",
-                    "processors": "StickDeadzone",
+                    "processors": "",
                     "groups": "Gamepad",
                     "action": "Move",
                     "isComposite": false,
@@ -319,6 +319,17 @@
                 },
                 {
                     "name": "",
+                    "id": "2f2fb1a2-9052-4a7c-93b0-e3a5a2722410",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Skill_2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "5c3d306f-208d-4053-a4e2-470032754589",
                     "path": "<Keyboard>/space",
                     "interactions": "",
@@ -368,28 +379,28 @@
             "id": "ededde03-98e2-4338-bc95-c816a3067ae1",
             "actions": [
                 {
-                    "name": "Look",
-                    "type": "Value",
-                    "id": "b2095124-8fb1-4c28-80e3-4538ed23f87a",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
                     "name": "Sprint",
                     "type": "PassThrough",
-                    "id": "b36fb684-94d3-41a4-a107-fd85d9ddc4b9",
+                    "id": "937f4f30-fd0c-497e-95de-d9475f81d1d5",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Look",
+                    "type": "Value",
+                    "id": "adb3aeb5-0829-4955-be54-78e5178eedd8",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
                 {
                     "name": "",
-                    "id": "e1bdacbb-3411-496a-b561-927c431f2812",
+                    "id": "aa4bb1e4-8a38-4c32-ab98-6296069a8e22",
                     "path": "<Keyboard>/leftShift",
                     "interactions": "",
                     "processors": "",
@@ -400,7 +411,7 @@
                 },
                 {
                     "name": "",
-                    "id": "5c8f0762-42ff-484f-89b6-3d925dd88b3a",
+                    "id": "cabee528-a7f2-4d8c-8971-d044d4c93f27",
                     "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
                     "processors": "",
@@ -411,7 +422,7 @@
                 },
                 {
                     "name": "",
-                    "id": "c0967931-03ff-4c50-b1e8-bc688388564f",
+                    "id": "4d09bfbc-00ea-4953-905d-eb5547c72125",
                     "path": "<Pointer>/delta",
                     "interactions": "",
                     "processors": "InvertVector2(invertX=false),ScaleVector2(x=0.05,y=0.05)",
@@ -422,7 +433,7 @@
                 },
                 {
                     "name": "",
-                    "id": "45b87039-d795-43eb-ac8f-d9d93b1cf414",
+                    "id": "594efca3-ae0a-4398-b867-83788e4f16b4",
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",
                     "processors": "InvertVector2(invertX=false),StickDeadzone,ScaleVector2(x=300,y=300)",

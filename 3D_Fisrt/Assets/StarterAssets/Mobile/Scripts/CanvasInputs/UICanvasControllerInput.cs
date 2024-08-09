@@ -35,6 +35,10 @@ namespace StarterAssets
         {
             starterAssetsInputs.TargetInput(virtualTargetState);
         }
+        public void VirtualSkill_2Input(bool virtualSkill2State)
+        {
+            starterAssetsInputs.Skill_2Input(virtualSkill2State);
+        }
     }
 
 }
