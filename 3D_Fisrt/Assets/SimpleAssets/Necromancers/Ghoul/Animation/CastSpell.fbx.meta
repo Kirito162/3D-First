@@ -58,7 +58,7 @@ ModelImporter:
       curves: []
       events:
       - time: 0.72938555
-        functionName: Attack
+        functionName: CastSpell
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: 0ec5ae55b1870c544892dcae618e0f05, type: 3}
         floatParameter: 0

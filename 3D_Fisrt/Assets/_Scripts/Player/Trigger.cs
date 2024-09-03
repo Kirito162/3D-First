@@ -6,20 +6,20 @@ public class Trigger : MonoBehaviour
 {
     ParticleSystem ps;
     public int damage = 10;
-    public DealDamage dealdamage;
+    public DealDamage dealDamage;
     private void Start()
     {
-        damage = dealdamage.baseDamage + dealdamage.damageBonus;
+        damage = dealDamage.baseDamage + dealDamage.damageBonus;
     }
     void OnEnable()
     {
         
         ps = GetComponent<ParticleSystem>();
 
-        AddDragonCollidersToTrigger();
+        AddCollidersToTrigger();
     }
 
-    void AddDragonCollidersToTrigger()
+    void AddCollidersToTrigger()
     {
         var trigger = ps.trigger;
         GameObject[] dragons = GameObject.FindGameObjectsWithTag("Enemy");
@@ -36,11 +36,8 @@ public class Trigger : MonoBehaviour
     void OnParticleTrigger()
     {
         List<ParticleSystem.Particle> inside = new List<ParticleSystem.Particle>();
-        List<ParticleSystem.Particle> exit = new List<ParticleSystem.Particle>();
-
         ParticleSystem.ColliderData insideData;
         int numInside = ps.GetTriggerParticles(ParticleSystemTriggerEventType.Inside, inside, out insideData);
-        int numExit = ps.GetTriggerParticles(ParticleSystemTriggerEventType.Exit, exit);
 
         for (int i = 0; i < numInside; i++)
         {
@@ -51,19 +48,23 @@ public class Trigger : MonoBehaviour
                 Collider collider = (Collider)insideData.GetCollider(i, j);
                 if (collider != null && collider.CompareTag("Enemy"))
                 {
-                    IDamageable damageable = collider.GetComponentInParent<IDamageable>();
-                    damageable?.TakeDamage(damage);
+                    ProcessCollision(collider);
                 }
             }
 
             inside[i] = p;
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
 
-        
-
         ps.SetTriggerParticles(ParticleSystemTriggerEventType.Inside, inside);
-        ps.SetTriggerParticles(ParticleSystemTriggerEventType.Exit, exit);
     }
-}
+    void ProcessCollision(Collider other)
+    {
+        if (((1 << other.gameObject.layer) & dealDamage.layerExcept) == 0)
+        {
+            IDamageable damageable = other.GetComponentInParent<IDamageable>();
+            damageable?.TakeDamage(damage);
+        }
+    }
+    }
 

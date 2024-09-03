@@ -111,8 +111,13 @@ public class CharacterMovement : MonoBehaviour
 
         Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
 
-        _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
+        if (_controller)
+        {
+            _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
                          new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+        }
+        else return;
+        
 
         if (_hasAnimator)
         {
@@ -255,6 +260,7 @@ public class CharacterMovement : MonoBehaviour
         if (animationEvent.animatorClipInfo.weight > 0.5f)
         {
             AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_controller.center), FootstepAudioVolume);
+            //Singleton.Instance.AudioManager.PlayAtPointSFX(LandingAudioClip, transform.TransformPoint(_controller.center));
         }
     }
 }

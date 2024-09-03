@@ -36,6 +36,7 @@ public class UIVirtualButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     void OutputButtonClickEvent()
     {
         buttonClickOutputEvent.Invoke();
+        Singleton.Instance.AudioManager.PlaySFX(1);
     }
 
 }

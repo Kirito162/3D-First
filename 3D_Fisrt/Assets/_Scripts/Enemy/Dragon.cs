@@ -4,28 +4,27 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Dragon : MonoBehaviour
+public class Dragon : Enemy
 {
-    public GameObject claw;
-    public Transform clawPoint;
-    public MeshCollider meshCollider;
-    public StateSO state;
-
-
-    public void Claw()
+    public void BasicAttack()
     {
-        //Transform pos = new Vector3(0, 0, animator.transform.position.z);
-        GameObject hit = Instantiate(claw, clawPoint.position, transform.rotation);
-        DealDamage scriptDealdamage = hit.GetComponent<DealDamage>();
-        if (scriptDealdamage != null) 
-        {
-            scriptDealdamage.baseDamage = state.damage;
-        }
+        objAttack[0].SetActive(true);
+        SetDamage(objAttack[0]);
+        StartCoroutine(DeactiveObjAttack(0.1f, objAttack[0]));
     }
-    public void Horn()
+    public void ClawAttack()
     {
-        //GameObject horn = Instantiate(claw, gameObject.transform.position + new Vector3(0,0,5), transform.rotation);
-        meshCollider.isTrigger = !meshCollider.isTrigger;
+        objAttack[1].SetActive(true);
+        SetDamage(objAttack[1]);
+        StartCoroutine(DeactiveObjAttack(0.1f, objAttack[1]));
     }
+    public void HornAttack()
+    {
+        objAttack[2].SetActive(true);
+        SetDamage(objAttack[2]);
+        StartCoroutine(DeactiveObjAttack(0.1f, objAttack[2]));
+    }
+
+    
 
 }

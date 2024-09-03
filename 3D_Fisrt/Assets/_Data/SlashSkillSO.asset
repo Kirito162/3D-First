@@ -16,6 +16,6 @@ MonoBehaviour:
   cooldown: 5
   manaCost: 2
   damageSkill: 5
+  requiredLevel: 0
   skillObject:
   - {fileID: 8063143177897367026, guid: c3694b8daf511634a8f58c46099a3742, type: 3}
-  skillPositon: {fileID: 0}

@@ -1,5 +1,7 @@
 using StarterAssets;
+using System;
 using System.Collections;
+using Unity.Burst.Intrinsics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,89 +11,88 @@ public class SkillManager : MonoBehaviour
     public SkillSO[] skills; // Danh sách các k? n?ng
     public Text[] cooldownTexts; // UI Text ?? hi?n th? th?i gian cooldown
     public float[] cooldownTimers; // Th?i gian cooldown còn l?i cho m?i k? n?ng
+    public Image[] cooldownImages; // Thanh cooldown
     public bool[] skillCooldownActive; // Ki?m tra xem k? n?ng có ?ang trong th?i gian cooldown không
+
     private StarterAssetsInputs _input;
     private Animator _animator;
     public PlayerData playerData;
+    private LevelSystem levelSystem;
+    private int _comboStep = 0;
+    public float comboMaxDelay = 1f; // Th?i gian t?i ?a gi?a các ?òn ?? ti?p t?c combo
+    private Coroutine comboCoroutine;
+    public PlayerMana playerMana;
+    /*public float dashSpeed = 20f; // T?c ?? dash
+    public float dashDuration = 0.2f; // Th?i gian dash
+    private CharacterController characterController;
+    private Vector3 dashDirection;
+    private bool isDashing = false;
+    private float dashTime;*/
+    [SerializeField] Text textPopUp;
+
     private void Start()
     {
         cooldownTimers = new float[skills.Length];
         skillCooldownActive = new bool[skills.Length];
         _input = GetComponent<StarterAssetsInputs>();
         _animator = GetComponent<Animator>();
+        levelSystem = GetComponent<LevelSystem>();
+        playerMana = GetComponent<PlayerMana>();
+        //characterController = GetComponent<CharacterController>();
     }
 
+    public void CheckRequireLvSkill(int skillIndex)
+    {
+        if (skills[skillIndex].requiredLevel > levelSystem.level)
+        {
+             Singleton.Instance.UIManager.ShowPopup(textPopUp, 2);
+        }
+    }
     public void HandleSkills()
     {
-        Skill1();
-        Skill2();
+        Combo();
+        CheckSkillInputs();
+        //CheckDash();
     }
 
-    private void Skill1()
+    private void CheckSkillInputs()
     {
-        if (_input.skill1 && !skillCooldownActive[0] && playerData.mana >= skills[0].manaCost)
-        {
-            UseSkill(0, playerData);
-            _animator.SetTrigger("Skill_1");
-            _input.skill1 = false;
-        }
+        if (_input.skill1) { ActivateSkill(0); }
+        if (_input.skill2) { ActivateSkill(1); }
+        if (_input.skill3) { ActivateSkill(2); }
     }
 
-    private void Skill2()
+    private void ActivateSkill(int skillIndex)
     {
-        if (_input.skill2)
-        {
-            UseSkill(1, playerData);
-            _animator.SetTrigger("Skill_2");
-            _input.skill2 = false;
-        }
-    }
-
-    public void Shoot1()
-    {
-
-        GameObject bullet = Instantiate(skills[0].skillObject[0], transform.position, transform.rotation);
-        DealDamage dealdamageScript = bullet.GetComponent<DealDamage>();
-        if (dealdamageScript != null)
-        {
-            dealdamageScript.baseDamage = skills[0].GetDamage(playerData);
-        }
-
-
-    }
-
-    public void Shoot2()
-    {
-        Instantiate(skills[1].skillObject[0], skills[1].skillPositon.position, transform.rotation);
-    }
-
-
-    public void UseSkill(int skillIndex, PlayerData player)
-    {
-        if (skillIndex < 0 || skillIndex >= skills.Length)
-        {
-            Debug.LogError("Invalid skill index");
-            return;
-        }
-
-        if (skillCooldownActive[skillIndex])
-        {
-            Debug.Log("Skill is on cooldown");
-            return;
-        }
-
+        //Kiem tra state hien tai, Idle or gan het state thi duoc Use
+        if (!IsAnimatorInAllowedState()) return;
+        //Kiem tra skill hien tai coldown xong chua
+        if (skillCooldownActive[skillIndex]) return;
         SkillSO skillData = skills[skillIndex];
-        if (player.mana < skillData.manaCost)
+        if (levelSystem.level < skillData.requiredLevel)
         {
-            Debug.Log("Not enough mana");
+            CheckRequireLvSkill(skillIndex);
+            textPopUp.text = "Require Level " + skillData.requiredLevel;
             return;
         }
+        if (playerMana.mana < skillData.manaCost)
+        {
+            Singleton.Instance.UIManager.ShowPopup(textPopUp, 2);
+            textPopUp.text = "Not enough mana";
+            return;
+        }
+        
+        UseSkill(skillIndex);
+        
+    }
 
-        // Th?c hi?n k? n?ng
-        skillData.UseSkill(player);
+    private void UseSkill(int skillIndex)
+    {
+        if (skillIndex < 0 || skillIndex >= skills.Length) return;
+        _animator.SetTrigger($"Skill_{skillIndex + 1}");
+        playerMana.TakeMana(skills[skillIndex].manaCost);
 
-        // B?t ??u cooldown
-        StartCoroutine(CooldownCoroutine(skillIndex, skillData.cooldown));
+        StartCoroutine(CooldownCoroutine(skillIndex, skills[skillIndex].cooldown));
     }
 
     private IEnumerator CooldownCoroutine(int skillIndex, float cooldown)
@@ -115,9 +116,109 @@ public class SkillManager : MonoBehaviour
     {
         if (cooldownTexts != null && skillIndex < cooldownTexts.Length)
         {
-            cooldownTexts[skillIndex].text = skillCooldownActive[skillIndex]
-                ? $"Cooldown: {Mathf.Max(0, cooldownTimers[skillIndex]):F1} s"
-                : "Ready!";
+            if (skillCooldownActive[skillIndex])
+            {
+                cooldownTexts[skillIndex].text = $"Cooldown: {Mathf.Max(0, cooldownTimers[skillIndex]):F1} s";
+            }
+            else
+            {
+                cooldownTexts[skillIndex].text = ""; // Xóa text khi cooldown k?t thúc
+            }
         }
+
+        if (cooldownImages != null && skillIndex < cooldownImages.Length)
+        {
+            cooldownImages[skillIndex].fillAmount = skillCooldownActive[skillIndex]
+                ? (cooldownTimers[skillIndex] / skills[skillIndex].cooldown)
+                : 0;
+        }
+    }
+
+    //--------------- Combo Meele ------------------------
+    public void Combo()
+    {
+        if (!IsAnimatorInAllowedState()) { return; }
+        if (_input.combo)
+        {
+            _input.combo = false;
+            
+            if (comboCoroutine != null)
+            {
+                StopCoroutine(comboCoroutine);
+            }
+            Debug.Log("combostep");
+            _comboStep++;
+            ExecuteCombo();
+
+            // B?t ??u l?i combo timer
+            comboCoroutine = StartCoroutine(ResetComboTimer());
+        } 
+    }
+
+    private void ExecuteCombo()
+    {
+        switch (_comboStep)
+        {
+            case 1:
+                _animator.SetTrigger("Attack1");
+                break;
+            case 2:
+                _animator.SetTrigger("Attack2");
+                break;
+            case 3:
+                _animator.SetTrigger("Attack3");
+                break;
+            default:
+                _comboStep = 0; // Reset l?i combo n?u v??t quá s? ?òn cho phép
+                break;
+        }
+    }
+
+    private IEnumerator ResetComboTimer()
+    {
+        yield return new WaitForSeconds(comboMaxDelay);
+        _comboStep = 0; // Reset combo n?u h?t th?i gian
+    }
+
+
+    //------------------------ Dash -----------------
+    /*private void CheckDash()
+    {
+        if (_input.target && !isDashing)
+        {
+            if (!IsAnimatorInAllowedState()) { return; }
+            StartDash();
+        }
+        if (isDashing)
+        {
+            Dash();
+        }
+    }
+    void StartDash()
+    {
+        _animator.SetTrigger("Dash");
+        isDashing = true;
+        dashTime = dashDuration;
+        dashDirection = transform.forward; // H??ng dash theo h??ng Player ?ang nhìn
+    }
+
+    void Dash()
+    {
+        if (dashTime > 0)
+        {            
+            characterController.Move(dashDirection * dashSpeed * Time.deltaTime);
+            dashTime -= Time.deltaTime;
+        }
+        else
+        {
+            isDashing = false;
+        }
+    }*/
+
+    private bool IsAnimatorInAllowedState()
+    {
+        AnimatorStateInfo stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
+        // Ki?m tra n?u animator ?ang trong tr?ng thái "Idle" ho?c các tr?ng thái b?n cho phép g?i skill.
+        return stateInfo.IsName("Idle Walk Run Blend") || stateInfo.normalizedTime >= 0.9f;
     }
 }

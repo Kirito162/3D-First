@@ -10,6 +10,10 @@ public class PlayerData : StateSO
 /*    public string playerName;
     public int hp;*/
     public int mana;
+    public int currentGold;
+    public int maxHP;
+    public int maxDamage;
+    public int maxMana;
     //public int damage;
     public Vector3 currentPosition;
 

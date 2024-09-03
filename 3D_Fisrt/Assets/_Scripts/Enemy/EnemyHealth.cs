@@ -6,9 +6,7 @@ public class EnemyHealth : Health, IDamageable
     public override void OnEnable()
     {
         hp = enemyState.hp;
-        healthBar.maxValue = hp;
+        
         base.OnEnable();
     }
-
-
 }

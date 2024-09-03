@@ -4,8 +4,8 @@ public class Singleton : MonoBehaviour
 {
     public static Singleton Instance { get; private set; }
 
-    //public AudioManager AudioManager { get; private set; }
-    //public UIManager UIManager { get; private set; }
+    public AudioManager AudioManager { get; private set; }
+    public UIManager UIManager { get; private set; }
 
     private void Awake()
     {
@@ -18,7 +18,8 @@ public class Singleton : MonoBehaviour
         Instance = this;
         GameObject.DontDestroyOnLoad(gameObject);
 
-        //AudioManager = GetComponentInChildren<AudioManager>();
+        AudioManager = GetComponentInChildren<AudioManager>();
+        UIManager = GetComponentInChildren<UIManager>();
         //UIManager = GetComponentInChildren<UIManager>();
     }
 }

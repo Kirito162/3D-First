@@ -6,7 +6,8 @@ public class PlayerController : MonoBehaviour
     private CharacterMovement _movement;
     private SkillManager _skill;
     private CameraController _cameraController;
-    private bool canInput = true;
+    public bool canInput = true;
+    public bool canMove = true;
 
     private void Start()
     {
@@ -19,11 +20,15 @@ public class PlayerController : MonoBehaviour
     {
         if (canInput)
         {
-            _movement.Move();
+            
             _movement.JumpAndGravity();
             _movement.GroundedCheck();
-            _movement.Target();
+            //_movement.Target();
             _skill.HandleSkills();
+            if (canMove)
+            {
+                _movement.Move();
+            }
         }
         
     }
@@ -35,7 +40,6 @@ public class PlayerController : MonoBehaviour
     public void DisableInput()
     {
         canInput = false;
-
     }
     public void EnableInput()
     {

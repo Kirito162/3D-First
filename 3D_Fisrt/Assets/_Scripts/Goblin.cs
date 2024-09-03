@@ -2,31 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Goblin : MonoBehaviour
+public class Goblin : Enemy
 {
-    public GameObject hitAttack;
-    public Transform hitPos;
-    public EnemyDetection detection;
-    public StateSO state;
-    private void Start()
+    public void CastSpell()
     {
-        detection = GetComponent<EnemyDetection>();
+        objAttack[0].SetActive(true);
+        SetDamage(objAttack[0]);
+        StartCoroutine(DeactiveObjAttack(0.1f, objAttack[0]));
     }
-    public void Update()
+    public void Attack1()
     {
-        Transform target = detection.GetClosestEnemy();
-        if(target != null) 
-        {
-            transform.LookAt(target.position);
-        }
-    }
-    public void Attack()
-    {
-        GameObject bullet = Instantiate(hitAttack, hitPos.position, transform.rotation);
-        DealDamage dealdamageScript = bullet.GetComponent<DealDamage>();
-        if (dealdamageScript != null)
-        {
-            dealdamageScript.baseDamage = state.damage;
-        }
+        objAttack[1].SetActive(true);
+        SetDamage(objAttack[1]);
+        StartCoroutine(DeactiveObjAttack(0.1f, objAttack[1]));
     }
 }

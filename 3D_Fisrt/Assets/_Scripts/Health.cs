@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public abstract class Health : MonoBehaviour
@@ -11,10 +12,13 @@ public abstract class Health : MonoBehaviour
     public Slider healthBar;
     public TextMeshProUGUI textHp;
     public int damage;
+    public UnityEvent onDeath;
 
     public virtual void OnEnable()
     {
+        healthBar.maxValue = hp;
         ChangeHealthBar();
+        InvokeRepeating("RestHP", 5, 10);
     }
     public virtual void TakeDamage(int damageAmount)
     {
@@ -22,14 +26,17 @@ public abstract class Health : MonoBehaviour
         if (hp <= 0)
         {
             hp = 0;
+            ChangeHealthBar();
             animator.SetTrigger("die");
             colliders.enabled = false;
+            CancelInvoke("RestHP");
+            onDeath?.Invoke();
         }
         else
         {
             animator.SetTrigger("damage");
+            ChangeHealthBar();
         }
-        ChangeHealthBar();
     }
 
     public virtual void ChangeHealthBar()
@@ -37,5 +44,13 @@ public abstract class Health : MonoBehaviour
         healthBar.value = hp;
         textHp.text = hp + "/" + healthBar.maxValue;
     }
-
+    public virtual void RestHP()
+    {
+        hp += Mathf.RoundToInt(healthBar.maxValue / 20f);
+        if (hp > (int)healthBar.maxValue)
+        {
+            hp = (int)healthBar.maxValue;
+        }
+        ChangeHealthBar();
+    }
 }

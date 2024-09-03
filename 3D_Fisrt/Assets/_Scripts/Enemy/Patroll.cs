@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class Patroll : StateMachineBehaviour
 {
     float timer;
+    [SerializeField] float timePatrol = 10f;
     List<Transform> wayPoints = new List<Transform>();
     NavMeshAgent navMeshAgent;
     public float chaseRange = 8;
@@ -32,7 +33,7 @@ public class Patroll : StateMachineBehaviour
             navMeshAgent.SetDestination(wayPoints[Random.Range(0, wayPoints.Count)].position);
         }
         timer += Time.deltaTime;
-        if (timer > 10)
+        if (timer > timePatrol)
         {
             animator.SetBool("isPatrolling", false);
         }

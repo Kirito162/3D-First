@@ -16,7 +16,8 @@ namespace StarterAssets
 		public bool skill1;
 		public bool skill2;
         public bool skill3;
-		public bool target;
+        public bool combo;
+        public bool target;
 		public bool cancleTarget;
         [Header("Movement Settings")]
 		public bool analogMovement;
@@ -64,6 +65,14 @@ namespace StarterAssets
         {
             Skill_2Input(value.isPressed);
         }
+        public void OnSkill_3(InputValue value)
+        {
+            Skill_3Input(value.isPressed);
+        }
+        public void OnCombo(InputValue value)
+        {
+            ComboInput(value.isPressed);
+        }
 #endif
 
 
@@ -90,6 +99,14 @@ namespace StarterAssets
         public void Skill_2Input(bool newSkill2State)
         {
             skill2 = newSkill2State;
+        }
+        public void Skill_3Input(bool newSkill3State)
+        {
+            skill3 = newSkill3State;
+        }
+        public void ComboInput(bool newComboState)
+        {
+            combo = newComboState;
         }
 
         public void Skill_1Input(bool newSkill1State)

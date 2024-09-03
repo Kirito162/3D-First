@@ -39,6 +39,15 @@ namespace StarterAssets
         {
             starterAssetsInputs.Skill_2Input(virtualSkill2State);
         }
+
+        public void VirtualSkill_3Input(bool virtualSkill3State)
+        {
+            starterAssetsInputs.Skill_3Input(virtualSkill3State);
+        }
+        public void VirtualComboInput(bool virtualComboState)
+        {
+            starterAssetsInputs.ComboInput(virtualComboState);
+        }
     }
 
 }

@@ -3,11 +3,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 namespace StarterAssets
 {
-#if ENABLE_INPUT_SYSTEM
-    [RequireComponent(typeof(PlayerInput))]
-#endif
-
-
     public class CameraController : MonoBehaviour
     {
         public GameObject CinemachineCameraTarget;

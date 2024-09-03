@@ -440,7 +440,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loadingSlider: {fileID: 1376801662}
   loadingText: {fileID: 1395403554}
-  sceneToLoad: Survival
+  sceneToLoad: MAP2
 --- !u!1 &1355171357
 GameObject:
   m_ObjectHideFlags: 0

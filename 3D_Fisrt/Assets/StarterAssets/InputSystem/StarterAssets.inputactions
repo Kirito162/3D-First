@@ -78,6 +78,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Combo",
+                    "type": "PassThrough",
+                    "id": "e28bcf15-7f5d-4db7-ac8d-a491d5bdf868",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Target",
                     "type": "PassThrough",
                     "id": "0ce8dd06-5291-460c-824c-ced2b4b6c339",
@@ -331,7 +340,7 @@
                 {
                     "name": "",
                     "id": "5c3d306f-208d-4053-a4e2-470032754589",
-                    "path": "<Keyboard>/space",
+                    "path": "<Keyboard>/r",
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardMouse",
@@ -369,6 +378,39 @@
                     "processors": "",
                     "groups": "KeyboardMouse",
                     "action": "CancleTarget",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1803681e-7616-485d-abcc-79e6b3205797",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Skill_3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "507f713d-764e-4b9e-8781-832fa7a40366",
+                    "path": "<Keyboard>/g",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "Combo",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9ae3a319-59ec-4365-967e-db8d8e1f9905",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Combo",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

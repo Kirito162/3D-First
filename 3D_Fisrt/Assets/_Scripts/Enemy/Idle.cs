@@ -7,6 +7,7 @@ public class Idle : StateMachineBehaviour
     float timer;
     public float chaseRange = 8;
     public EnemyDetection enemyDetection;
+    [SerializeField] float timeIdle = 5f;
     //OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -19,7 +20,7 @@ public class Idle : StateMachineBehaviour
     {
         Transform target = enemyDetection.GetClosestEnemy();
         timer += Time.deltaTime;
-        if (timer > 5)
+        if (timer > timeIdle)
         {
             animator.SetBool("isPatrolling", true);
         }

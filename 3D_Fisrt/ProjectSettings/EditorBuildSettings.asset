@@ -6,19 +6,16 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_Scenes/Menu.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/_Scenes/HomePage.unity
+    guid: 75883918a6076254f8b9dd7671d9a571
   - enabled: 1
     path: Assets/_Scenes/Loading.unity
     guid: 05888913d8083334695dad08c2700f3a
   - enabled: 1
-    path: Assets/_Scenes/Survival.unity
-    guid: 861f1064e63ea76418bb88c3fc7d6734
+    path: Assets/_Scenes/MAP2.unity
+    guid: 4af47c156152b89469adbb126c7c8c26
   - enabled: 0
-    path: Assets/_Scenes/Demo with terrain.unity
-    guid: 594da9eac4a488a479b252ff922516d9
-  - enabled: 0
-    path: Assets/StarterAssets/ThirdPersonController/Scenes/Playground.unity
-    guid: e9017d5f96b9f09489b4b37e1d6eb914
+    path: Assets/_Scenes/CreateMapNew.unity
+    guid: b1093f44975947f42a1c8e73c02fa511
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 9e7be553448fa2546aea5752021cbcf7, type: 2}

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -7,31 +8,50 @@ public class Attack : StateMachineBehaviour
 {
     public EnemyDetection enemyDetection;
 
-    /*public float outRangeAttack = 4f;
-    private float lastNormalizedTime = 0f;
-     OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-    //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    public float outRangeAttack = 4f;
+    //private float lastNormalizedTime = 0f;
+    public string[] animationNames;
+    bool isAttacking;
+    float timer;
+    [SerializeField] float timeDelayAttack = 0.5f;
+    //OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
+    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         enemyDetection = animator.GetComponent<EnemyDetection>();
-        lastNormalizedTime = 0f;
+        //lastNormalizedTime = 0f;
+        isAttacking = false;
+        timer = 0;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Transform target = enemyDetection.GetClosestEnemyInView();
+        timer += Time.deltaTime;
+        Transform target = enemyDetection.GetClosestEnemy();
         if (target != null) 
         {
             //animator.transform.LookAt(target);
             float distance = Vector3.Distance(target.position, animator.transform.position);
             if (distance > outRangeAttack)
-                animator.SetBool("ClawAttack", false);
+            {
+                animator.SetBool("isAttacking", false);
+            }
+            else if (!isAttacking && timer >= timeDelayAttack)
+            {
+                animator.transform.LookAt(target.position);
+                //animator.SetBool("isAttacking", true);
+                //isAttacking = true;
+                PlayRandomAnimation(animator);
+                isAttacking = true;
+            }
         }
-        if (stateInfo.normalizedTime % 1 <= lastNormalizedTime)
+        /*if (stateInfo.normalizedTime % 1 <= lastNormalizedTime)
         {
             animator.transform.LookAt(target);
         }
-        lastNormalizedTime = stateInfo.normalizedTime % 1;
+
+        lastNormalizedTime = stateInfo.normalizedTime % 1;*/
+        
 
     }
 
@@ -39,18 +59,21 @@ public class Attack : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
-    }*/
-
-    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        enemyDetection = animator.GetComponent<EnemyDetection>();
+        /*Transform target = enemyDetection.GetClosestEnemy();
+        animator.gameObject.transform.LookAt(target);*/
     }
-    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    void PlayRandomAnimation(Animator animator)
     {
-        Transform target = enemyDetection.GetClosestEnemyInView();
-        animator.transform.LookAt(target);
+        if (animationNames.Length == 0)
+        {
+            Debug.LogWarning("No animations found!");
+            return;
+        }
+
+        int randomIndex = Random.Range(0, animationNames.Length);
+        string randomAnimation = animationNames[randomIndex];
+
+        animator.SetTrigger(randomAnimation);
 
     }
-
 }

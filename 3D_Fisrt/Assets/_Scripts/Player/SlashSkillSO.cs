@@ -6,7 +6,7 @@ using UnityEngine.Windows;
 public class SlashSkillSO : SkillSO
 {
     
-    public override void UseSkill(PlayerData player)
+    /*public override void UseSkill(PlayerData player)
     {
         // Ki?m tra ?? mana
         if (player.mana < manaCost)
@@ -27,6 +27,6 @@ public class SlashSkillSO : SkillSO
 
 
         // Ví d?: T?o m?t ??i t??ng l?a ho?c làm ?i?u gì ?ó v?i damage
-    }
+    }*/
 
 }

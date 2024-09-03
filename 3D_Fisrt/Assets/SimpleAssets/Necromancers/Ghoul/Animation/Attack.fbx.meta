@@ -58,7 +58,7 @@ ModelImporter:
       curves: []
       events:
       - time: 0.465995
-        functionName: Attack
+        functionName: Attack1
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: 0ec5ae55b1870c544892dcae618e0f05, type: 3}
         floatParameter: 0

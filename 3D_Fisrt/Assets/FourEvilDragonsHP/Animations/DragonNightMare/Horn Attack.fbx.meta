@@ -514,14 +514,7 @@ ModelImporter:
       curves: []
       events:
       - time: 0.43337843
-        functionName: Horn
-        data: 
-        objectReferenceParameter: {fileID: 11500000, guid: 20c3d942b2e6a7b498ad1ebdf27ecc4a, type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.5865094
-        functionName: Horn
+        functionName: HornAttack
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: 20c3d942b2e6a7b498ad1ebdf27ecc4a, type: 3}
         floatParameter: 0

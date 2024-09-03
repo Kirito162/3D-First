@@ -4,7 +4,8 @@ public class PlayerHealth : Health, IDamageable
 {
     private PlayerController controller;
     public PlayerData playerData;
-    public UnityEvent onPlayerDeath;
+    //public UnityEvent onPlayerDeath;
+    public bool isShield = false;
     // Start is called before the first frame update
     public override void OnEnable() 
     { 
@@ -17,11 +18,11 @@ public class PlayerHealth : Health, IDamageable
 
     public override void TakeDamage(int damageAmount)
     {
+        if (isShield) { return; }
         base.TakeDamage(damageAmount);
         if (hp <=0) 
         { 
             controller.enabled = false; 
-            onPlayerDeath?.Invoke();
         }
     }
 

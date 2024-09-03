@@ -29387,3 +29387,5 @@ MonoBehaviour:
   layerExcept:
     serializedVersion: 2
     m_Bits: 128
+  isFalseAfterDeal: 1
+  isDestroyAfterDeal: 0
