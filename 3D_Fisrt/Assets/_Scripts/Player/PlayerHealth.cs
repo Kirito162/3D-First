@@ -11,7 +11,7 @@ public class PlayerHealth : Health, IDamageable
     { 
         hp = playerData.hp;
         base.OnEnable();
-        transform.position = playerData.currentPosition;
+        //transform.position = playerData.currentPosition;
         controller = GetComponent<PlayerController>();
 
     }
@@ -25,6 +25,5 @@ public class PlayerHealth : Health, IDamageable
             controller.enabled = false; 
         }
     }
-
 
 }

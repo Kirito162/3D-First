@@ -38,12 +38,19 @@ public class Attack : StateMachineBehaviour
             }
             else if (!isAttacking && timer >= timeDelayAttack)
             {
-                animator.transform.LookAt(target.position);
-                //animator.SetBool("isAttacking", true);
-                //isAttacking = true;
+                //animator.transform.LookAt(target.position);
+                // Xoay ch? trong m?t ph?ng ngang (không xoay theo tr?c Y)
+                Vector3 directionToTarget = target.position - animator.transform.position;
+                directionToTarget.y = 0; // Lo?i b? thay ??i ?? cao
+                animator.transform.rotation = Quaternion.LookRotation(directionToTarget);
+
                 PlayRandomAnimation(animator);
                 isAttacking = true;
             }
+        }
+        else
+        {
+            animator.SetBool("isAttacking", false);
         }
         /*if (stateInfo.normalizedTime % 1 <= lastNormalizedTime)
         {

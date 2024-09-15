@@ -5,8 +5,8 @@ public class DealDamage : MonoBehaviour
     public int baseDamage = 0;
     public int damageBonus = 0;
     public LayerMask layerExcept;
-    [SerializeField] private bool isFalseAfterDeal = true;
-    [SerializeField] private bool isDestroyAfterDeal = true;
+    [SerializeField] private bool isFalseAfterDeal = false;
+    [SerializeField] private bool isDestroyAfterDeal = false;
 
     // Start is called before the first frame update
     private void OnTriggerEnter(Collider other)
@@ -29,15 +29,17 @@ public class DealDamage : MonoBehaviour
 
                 
             }
+
+            if (isDestroyAfterDeal)
+            {
+                Destroy(gameObject, 0.5f);
+            }
+            if (isFalseAfterDeal)
+            {
+                gameObject.SetActive(false);
+            }
         }
-        if (isDestroyAfterDeal) 
-        {
-            Destroy(gameObject, 0.5f);
-        }
-        if (isDestroyAfterDeal)
-        {
-            gameObject.SetActive(false);
-        }
+        
 
 
     }

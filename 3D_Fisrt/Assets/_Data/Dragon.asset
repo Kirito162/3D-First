@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbeefecf395dd4749a2d1ae7c45804d5, type: 3}
   m_Name: Dragon
   m_EditorClassIdentifier: 
-  nameCharacter: Goblin
-  hp: 100
+  nameCharacter: Dragon
+  hp: 200
   damage: 15

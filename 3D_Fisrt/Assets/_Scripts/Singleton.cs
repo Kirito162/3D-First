@@ -20,6 +20,5 @@ public class Singleton : MonoBehaviour
 
         AudioManager = GetComponentInChildren<AudioManager>();
         UIManager = GetComponentInChildren<UIManager>();
-        //UIManager = GetComponentInChildren<UIManager>();
     }
 }

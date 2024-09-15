@@ -6,6 +6,21 @@ public class EnemyDetection : MonoBehaviour
     public float detectionRadius = 10f;
     public LayerMask targetLayer;
     public Camera playerCamera;
+
+    //public List<Transform> wayPoints = new List<Transform>();
+
+    private void Start()
+    {
+        //playerCamera = FindAnyObjectByType<Camera>();
+        playerCamera = FindObjectOfType<Camera>();
+        /*GameObject go = GameObject.FindGameObjectWithTag("WayPoints");
+
+        foreach (Transform t in go.transform)
+        {
+            wayPoints.Add(t);
+        }*/
+    }
+    
     public List<Transform> GetEnemiesInRange()
     {
         Collider[] enemies = Physics.OverlapSphere(transform.position, detectionRadius, targetLayer);

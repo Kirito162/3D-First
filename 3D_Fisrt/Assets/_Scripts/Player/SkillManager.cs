@@ -22,12 +22,7 @@ public class SkillManager : MonoBehaviour
     public float comboMaxDelay = 1f; // Th?i gian t?i ?a gi?a các ?òn ?? ti?p t?c combo
     private Coroutine comboCoroutine;
     public PlayerMana playerMana;
-    /*public float dashSpeed = 20f; // T?c ?? dash
-    public float dashDuration = 0.2f; // Th?i gian dash
-    private CharacterController characterController;
-    private Vector3 dashDirection;
-    private bool isDashing = false;
-    private float dashTime;*/
+
     [SerializeField] Text textPopUp;
 
     private void Start()
@@ -118,7 +113,7 @@ public class SkillManager : MonoBehaviour
         {
             if (skillCooldownActive[skillIndex])
             {
-                cooldownTexts[skillIndex].text = $"Cooldown: {Mathf.Max(0, cooldownTimers[skillIndex]):F1} s";
+                cooldownTexts[skillIndex].text = $"{Mathf.Max(0, cooldownTimers[skillIndex]):F1}";
             }
             else
             {
@@ -146,11 +141,11 @@ public class SkillManager : MonoBehaviour
             {
                 StopCoroutine(comboCoroutine);
             }
-            Debug.Log("combostep");
+
             _comboStep++;
             ExecuteCombo();
 
-            // B?t ??u l?i combo timer
+            // Bat dau lai combo timer
             comboCoroutine = StartCoroutine(ResetComboTimer());
         } 
     }
@@ -179,41 +174,6 @@ public class SkillManager : MonoBehaviour
         yield return new WaitForSeconds(comboMaxDelay);
         _comboStep = 0; // Reset combo n?u h?t th?i gian
     }
-
-
-    //------------------------ Dash -----------------
-    /*private void CheckDash()
-    {
-        if (_input.target && !isDashing)
-        {
-            if (!IsAnimatorInAllowedState()) { return; }
-            StartDash();
-        }
-        if (isDashing)
-        {
-            Dash();
-        }
-    }
-    void StartDash()
-    {
-        _animator.SetTrigger("Dash");
-        isDashing = true;
-        dashTime = dashDuration;
-        dashDirection = transform.forward; // H??ng dash theo h??ng Player ?ang nhìn
-    }
-
-    void Dash()
-    {
-        if (dashTime > 0)
-        {            
-            characterController.Move(dashDirection * dashSpeed * Time.deltaTime);
-            dashTime -= Time.deltaTime;
-        }
-        else
-        {
-            isDashing = false;
-        }
-    }*/
 
     private bool IsAnimatorInAllowedState()
     {

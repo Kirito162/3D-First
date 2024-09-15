@@ -12,7 +12,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip[] musicSounds, sfxSounds;
     public AudioSource musicSource, sfxSource;
     public Slider musicBar, sfxBar;
-    public TextMeshProUGUI musicSvae;
+ 
     private void OnEnable()
     {
         float musicVolume = PlayerPrefs.GetFloat("Music_Volume");

@@ -99,7 +99,9 @@ public class PlayerAnimationEvents : MonoBehaviour
     //------------------------ Dash -----------------
     public void Dash()
     {
+        Singleton.Instance.AudioManager.PlayAtPointSFX(15, transform);
         StartCoroutine(DashCoroutine());
+        effectObjects[1].GetComponent<TrailRenderer>().enabled = true;
     }
 
     private IEnumerator DashCoroutine()
@@ -112,5 +114,8 @@ public class PlayerAnimationEvents : MonoBehaviour
             characterController.Move(dashDirection * dashSpeed * Time.deltaTime);
             yield return null; // Ch? ??n frame ti?p theo
         }
+
+        effectObjects[1].GetComponent<TrailRenderer>().enabled = false;
     }
+
 }

@@ -10,14 +10,16 @@ public class Chase : StateMachineBehaviour
     public float attackRange = 4f;
     public float chaseRangeOut = 15f;
     public float speedChase = 3.5f;
-    
+    public float speedNormal;
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         navMeshAgent = animator.GetComponent<NavMeshAgent>();
-        navMeshAgent.speed = speedChase;
         enemyDetection = animator.GetComponent<EnemyDetection>();
-        
+        speedNormal = navMeshAgent.speed;
+        navMeshAgent.speed = speedChase;
+
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -38,6 +40,10 @@ public class Chase : StateMachineBehaviour
             }
                 
         }
+        else
+        {
+            animator.SetBool("isChasing", false);
+        }
         
 
     }
@@ -46,6 +52,7 @@ public class Chase : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         navMeshAgent.SetDestination(animator.transform.position);
+        navMeshAgent.speed = speedNormal;
     }
 
 

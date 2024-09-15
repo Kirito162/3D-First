@@ -8,15 +8,16 @@ public class CreateTransformAfter : MonoBehaviour
 	public float time;
     
 	// Use this for initialization
-	void Start () {
-		Invoke("Create", time);
-	}
 
-	void Create()
+    private void OnEnable()
+    {
+        Invoke("Create", time);
+    }
+    void Create()
 	{
-        Vector3 v = transform.position;
+        Vector3 v = transform.parent.parent.position;
         v.y = 0;
         Singleton.Instance.AudioManager.PlayAtPointSFX(13, transform);
-        Destroy(Instantiate(particle, v + transform.forward * 10, transform.rotation).gameObject, 5); 
+        Destroy(Instantiate(particle, v + transform.forward * 2, transform.rotation).gameObject, 5); 
 	}
 }

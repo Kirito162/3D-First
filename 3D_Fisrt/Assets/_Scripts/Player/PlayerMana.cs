@@ -20,7 +20,12 @@ public class PlayerMana : MonoBehaviour
     public void TakeMana(int manaAmount)
     {
         mana -= manaAmount;
+        if(mana > ManaBar.maxValue)
+        {
+            mana = (int)ManaBar.maxValue;
+        }
         ChangeManaBar();
+        
     }
 
 

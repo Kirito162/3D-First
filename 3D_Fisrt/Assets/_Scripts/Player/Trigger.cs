@@ -22,16 +22,25 @@ public class Trigger : MonoBehaviour
     void AddCollidersToTrigger()
     {
         var trigger = ps.trigger;
-        GameObject[] dragons = GameObject.FindGameObjectsWithTag("Enemy");
-        for (int i = 0; i < dragons.Length; i++)
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        GameObject[] stones = GameObject.FindGameObjectsWithTag("Stone");
+
+        List<GameObject> allTargets = new List<GameObject>();
+        allTargets.AddRange(enemies);
+        allTargets.AddRange(players);
+        allTargets.AddRange(stones);
+
+        for (int i = 0; i < allTargets.Count; i++)
         {
-            Collider dragonCollider = dragons[i].GetComponent<Collider>();
-            if (dragonCollider != null)
+            Collider targetCollider = allTargets[i].GetComponent<Collider>();
+            if (targetCollider != null)
             {
-                trigger.SetCollider(i, dragonCollider);
+                trigger.SetCollider(i, targetCollider);
             }
         }
     }
+
 
     void OnParticleTrigger()
     {
@@ -46,7 +55,7 @@ public class Trigger : MonoBehaviour
             for (int j = 0; j < insideData.GetColliderCount(i); j++)
             {
                 Collider collider = (Collider)insideData.GetCollider(i, j);
-                if (collider != null && collider.CompareTag("Enemy"))
+                if (collider != null && (collider.CompareTag("Enemy") || collider.CompareTag("Player") || collider.CompareTag("Stone")))
                 {
                     ProcessCollision(collider);
                 }

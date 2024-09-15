@@ -19,7 +19,7 @@ public class SoulEater : Enemy
         objAttack[0].transform.position = fireballSpawnPoint.position;
         objAttack[0].transform.rotation = fireballSpawnPoint.rotation;
         Vector3 direction = (target.position - fireballSpawnPoint.position).normalized;
-
+        objAttack[0].transform.SetParent(null);
 
         SetDamage(objAttack[0]);
         objAttack[0].SetActive(true);

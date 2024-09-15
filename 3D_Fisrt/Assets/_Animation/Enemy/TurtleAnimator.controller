@@ -113,8 +113,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timePatrol: 10
-  chaseRange: 10
+  radiusWaypoints: 23
+  chaseRange: 12
   enemyDetection: {fileID: 0}
+  wayPoints: []
 --- !u!1101 &-3602657273847352716
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -301,7 +303,8 @@ MonoBehaviour:
   enemyDetection: {fileID: 0}
   attackRange: 9
   chaseRangeOut: 15
-  speedChase: 3.5
+  speedChase: 3
+  speedNormal: 0
 --- !u!1102 &1102056595657830446
 AnimatorState:
   serializedVersion: 6
@@ -523,7 +526,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43944779a1c201547881960a06261104, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chaseRange: 10
+  chaseRange: 12
   enemyDetection: {fileID: 0}
   timeIdle: 5
 --- !u!1102 &3331016983394521816
@@ -746,4 +749,4 @@ MonoBehaviour:
   - Attack3
   - Attack1
   - Attack2
-  timeDelayAttack: 1.5
+  timeDelayAttack: 2

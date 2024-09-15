@@ -11,14 +11,14 @@ public abstract class Health : MonoBehaviour
     public Collider colliders;
     public Slider healthBar;
     public TextMeshProUGUI textHp;
-    public int damage;
+    //public int damage;
     public UnityEvent onDeath;
 
     public virtual void OnEnable()
     {
         healthBar.maxValue = hp;
         ChangeHealthBar();
-        InvokeRepeating("RestHP", 5, 10);
+        InvokeRepeating("RestHP", 10, 10);
     }
     public virtual void TakeDamage(int damageAmount)
     {
@@ -37,6 +37,15 @@ public abstract class Health : MonoBehaviour
             animator.SetTrigger("damage");
             ChangeHealthBar();
         }
+    }
+    public virtual void Heal(int healAmount)
+    {
+        hp += healAmount;
+        if (hp > healthBar.maxValue)
+        {
+            hp = (int)healthBar.maxValue;
+        }
+        ChangeHealthBar();
     }
 
     public virtual void ChangeHealthBar()
