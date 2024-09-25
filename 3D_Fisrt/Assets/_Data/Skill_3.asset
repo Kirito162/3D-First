@@ -16,4 +16,4 @@ MonoBehaviour:
   cooldown: 10
   manaCost: 40
   damageSkill: 30
-  requiredLevel: 2
+  requiredLevel: 3

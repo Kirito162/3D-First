@@ -93,8 +93,13 @@ public class GameManager : MonoBehaviour
             }
             PlayerPrefs.SetInt(currentChapterKey + i, checkStart);
         }
-        PlayerPrefs.SetInt(currentChapterKey, stars);
-        PlayerPrefs.Save();
+        int currentStarts = PlayerPrefs.GetInt(currentChapterKey);
+        if (currentStarts < stars)
+        {
+            PlayerPrefs.SetInt(currentChapterKey, stars);
+            PlayerPrefs.Save();
+        }
+        
     }
 
     private int CalculateStars(bool[] conditions)

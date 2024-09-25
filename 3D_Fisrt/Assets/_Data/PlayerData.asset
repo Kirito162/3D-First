@@ -13,12 +13,10 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   nameCharacter: Nakano Miku
-  hp: 270
-  damage: 20
-  defautlHp: 100
-  defautlDamage: 20
+  hp: 210
+  damage: 70
   mana: 170
-  currentGold: 4439
+  currentGold: 3498
   maxHP: 1000
   maxDamage: 200
   maxMana: 1000
