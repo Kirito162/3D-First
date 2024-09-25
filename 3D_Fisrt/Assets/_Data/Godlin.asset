@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Godlin
   m_EditorClassIdentifier: 
   nameCharacter: Godlin
-  hp: 50
+  hp: 100
   damage: 5

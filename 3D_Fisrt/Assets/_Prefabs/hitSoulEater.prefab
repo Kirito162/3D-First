@@ -146,8 +146,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b634781a0c5a960489b66704705e4a4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseDamage: 0
   damageBonus: 0
-  state: {fileID: 11400000, guid: 81b1356a8fae5124ab334c9b39c85763, type: 2}
   layerExcept:
     serializedVersion: 2
     m_Bits: 256
+  isFalseAfterDeal: 0
+  isSkillDamage: 0

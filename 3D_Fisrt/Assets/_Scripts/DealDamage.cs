@@ -6,7 +6,7 @@ public class DealDamage : MonoBehaviour
     public int damageBonus = 0;
     public LayerMask layerExcept;
     [SerializeField] private bool isFalseAfterDeal = false;
-    [SerializeField] private bool isDestroyAfterDeal = false;
+    [SerializeField] private bool isSkillDamage = false;
 
     // Start is called before the first frame update
     private void OnTriggerEnter(Collider other)
@@ -17,23 +17,18 @@ public class DealDamage : MonoBehaviour
                 }*/
         if (((1 << other.gameObject.layer) & layerExcept) == 0)
         {
+            
             IDamageable damageable = other.GetComponentInParent<IDamageable>();
             if (damageable != null)
             {
-                damageable.TakeDamage(baseDamage + damageBonus);
+                damageable.TakeDamage(baseDamage + damageBonus, isSkillDamage);
             }
             else
             {
                 IDamageable damageablePlayer = other.GetComponent<IDamageable>();
-                damageablePlayer?.TakeDamage(baseDamage + damageBonus);
-
-                
+                damageablePlayer?.TakeDamage(baseDamage + damageBonus, isSkillDamage);
             }
 
-            if (isDestroyAfterDeal)
-            {
-                Destroy(gameObject, 0.5f);
-            }
             if (isFalseAfterDeal)
             {
                 gameObject.SetActive(false);

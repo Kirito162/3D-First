@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Dragon
   m_EditorClassIdentifier: 
   nameCharacter: Dragon
-  hp: 200
+  hp: 400
   damage: 15

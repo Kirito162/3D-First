@@ -18,7 +18,7 @@ public class EnemyHealth : Health, IDamageable
         base.OnEnable();
     }
 
-    public override void TakeDamage(int damageAmount)
+    public override void TakeDamage(int damageAmount, bool isSkillDamage = false)
     {
         if (!isHealthBarVisible)
         {
@@ -31,7 +31,8 @@ public class EnemyHealth : Health, IDamageable
         //StartCoroutine(HideHealthBarAfterDelay());
         CancelInvoke("HideHealthBarAfterDelay");
         Invoke("HideHealthBarAfterDelay", 10f);
-        base.TakeDamage(damageAmount);
+        base.TakeDamage(damageAmount, isSkillDamage);
+        Singleton.Instance.DamagePopUpGenerator.CreatePopup(transform.position + new Vector3(0,2,0), damageAmount.ToString(), Color.red);
     }
 
     private void HideHealthBarAfterDelay()

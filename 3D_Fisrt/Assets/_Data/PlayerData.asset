@@ -18,8 +18,8 @@ MonoBehaviour:
   defautlHp: 100
   defautlDamage: 20
   mana: 170
-  currentGold: 3925
+  currentGold: 4439
   maxHP: 1000
   maxDamage: 200
   maxMana: 1000
-  currentPosition: {x: 0, y: 2, z: 0}
+  currentPosition: {x: 0, y: 0, z: 0}

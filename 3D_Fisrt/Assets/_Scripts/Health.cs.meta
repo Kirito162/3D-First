@@ -3,7 +3,12 @@ guid: f2b2eb5664a34fc458e60801e1394c17
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - animator: {instanceID: 0}
+  - colliders: {instanceID: 0}
+  - healthBar: {instanceID: 0}
+  - textHp: {instanceID: 0}
+  - healEffect: {fileID: 9017484664307500583, guid: 1245b8d2997d5b34fb1637be70a7eb05, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

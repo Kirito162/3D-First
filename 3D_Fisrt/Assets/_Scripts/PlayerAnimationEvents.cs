@@ -66,7 +66,7 @@ public class PlayerAnimationEvents : MonoBehaviour
     {
         ActivateSkillObject(4, 0.5f);
         ActivateEffectObject(0, 0.5f);
-        SetDamage(skillObjects[4], playerData.damage);
+        SetDamage(skillObjects[4], (int)(playerData.damage * 1.5));
         Singleton.Instance.AudioManager.PlaySFX(5);
     }
 
@@ -78,7 +78,7 @@ public class PlayerAnimationEvents : MonoBehaviour
         fireball.transform.rotation = fireballSpawnPoint.rotation;
         fireball.SetActive(true);
         fireball.GetComponent<Rigidbody>().velocity = fireballSpawnPoint.forward * fireballSpeed;
-        SetDamage(fireball, skills[2].GetDamage(playerData));
+        SetDamage(fireball, skills[2].GetDamage(playerData) * 2);
     }
 
     private IEnumerator DeactivateAfterDelay(float delay, GameObject gameObject)
@@ -99,7 +99,7 @@ public class PlayerAnimationEvents : MonoBehaviour
     //------------------------ Dash -----------------
     public void Dash()
     {
-        Singleton.Instance.AudioManager.PlayAtPointSFX(15, transform);
+        Singleton.Instance.AudioManager.PlaySFX(15);
         StartCoroutine(DashCoroutine());
         effectObjects[1].GetComponent<TrailRenderer>().enabled = true;
     }

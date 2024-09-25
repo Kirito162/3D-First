@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SkeletonGiant
   m_EditorClassIdentifier: 
   nameCharacter: Goblin
-  hp: 150
-  damage: 15
+  hp: 250
+  damage: 25

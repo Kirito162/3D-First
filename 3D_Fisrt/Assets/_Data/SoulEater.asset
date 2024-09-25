@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SoulEater
   m_EditorClassIdentifier: 
   nameCharacter: SoulEater
-  hp: 100
+  hp: 150
   damage: 15

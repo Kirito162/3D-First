@@ -76,12 +76,23 @@ public class GameManager : MonoBehaviour
         starConditions[0] = true;
         starConditions[1] = stoneObjects.Count >= requiredStoneTowers; 
         starConditions[2] = completedTimeSpan <= requiredTimeSpan; 
+        
 
         int stars = CalculateStars(starConditions);
         int goldReward = baseGoldReward * stars;
         goldManager.AddGold(goldReward);
         winPanelManager.ShowWinPanel(stars, goldReward, timerManager.GetFormattedTime(), starConditions, enemyKill - enemyObjects.Count, stoneObjects.Count);
         string currentChapterKey = SceneManager.GetActiveScene().name;
+
+        for (int i = 0; i < starConditions.Length; i++)
+        {
+            int checkStart = 0;
+            if (starConditions[i])
+            {
+                checkStart = 1; //1 = true(sao da dat duoc), 0 = fasle(chua dat duoc)
+            }
+            PlayerPrefs.SetInt(currentChapterKey + i, checkStart);
+        }
         PlayerPrefs.SetInt(currentChapterKey, stars);
         PlayerPrefs.Save();
     }

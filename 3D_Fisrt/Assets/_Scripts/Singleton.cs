@@ -6,6 +6,7 @@ public class Singleton : MonoBehaviour
 
     public AudioManager AudioManager { get; private set; }
     public UIManager UIManager { get; private set; }
+    public DamagePopUpGenerator DamagePopUpGenerator { get; private set; }
 
     private void Awake()
     {
@@ -20,5 +21,6 @@ public class Singleton : MonoBehaviour
 
         AudioManager = GetComponentInChildren<AudioManager>();
         UIManager = GetComponentInChildren<UIManager>();
+        DamagePopUpGenerator = GetComponentInChildren<DamagePopUpGenerator>();
     }
 }

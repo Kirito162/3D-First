@@ -249,8 +249,9 @@ public class CharacterMovement : MonoBehaviour
         {
             if (FootstepAudioClips.Length > 0)
             {
+                float sfxVolume = PlayerPrefs.GetFloat("SFX_Volume", 1);
                 var index = Random.Range(0, FootstepAudioClips.Length);
-                AudioSource.PlayClipAtPoint(FootstepAudioClips[index], transform.TransformPoint(_controller.center), FootstepAudioVolume);
+                AudioSource.PlayClipAtPoint(FootstepAudioClips[index], transform.TransformPoint(_controller.center), sfxVolume);
             }
         }
     }
@@ -259,7 +260,8 @@ public class CharacterMovement : MonoBehaviour
     {
         if (animationEvent.animatorClipInfo.weight > 0.5f)
         {
-            AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_controller.center), FootstepAudioVolume);
+            float sfxVolume = PlayerPrefs.GetFloat("SFX_Volume", 1);
+            AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_controller.center), sfxVolume);
             //Singleton.Instance.AudioManager.PlayAtPointSFX(LandingAudioClip, transform.TransformPoint(_controller.center));
         }
     }

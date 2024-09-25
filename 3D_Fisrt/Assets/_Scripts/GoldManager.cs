@@ -11,7 +11,7 @@ public class GoldManager : MonoBehaviour
     public void Start()
     {
         InvokeRepeating("AutoGainGold", 10, 10);
-        playerData.currentGold = PlayerPrefs.GetInt("Gold");
+        playerData.currentGold = PlayerPrefs.GetInt("Gold", 10000);
         textGold.text = "" + playerData.currentGold;
     }
     public void AddGold(int amount)

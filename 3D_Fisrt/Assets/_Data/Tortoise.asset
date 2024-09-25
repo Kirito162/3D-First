@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Tortoise
   m_EditorClassIdentifier: 
   nameCharacter: Goblin
-  hp: 300
+  hp: 1000
   damage: 15

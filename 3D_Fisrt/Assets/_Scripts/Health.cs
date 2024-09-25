@@ -13,6 +13,8 @@ public abstract class Health : MonoBehaviour
     public TextMeshProUGUI textHp;
     //public int damage;
     public UnityEvent onDeath;
+    public GameObject healEffect;
+    public float getHitChance = 0.5f; // xac suat chay anim getHit
 
     public virtual void OnEnable()
     {
@@ -20,7 +22,7 @@ public abstract class Health : MonoBehaviour
         ChangeHealthBar();
         InvokeRepeating("RestHP", 10, 10);
     }
-    public virtual void TakeDamage(int damageAmount)
+    public virtual void TakeDamage(int damageAmount, bool isSkillDamage = false)
     {
         hp -= damageAmount;
         if (hp <= 0)
@@ -34,7 +36,15 @@ public abstract class Health : MonoBehaviour
         }
         else
         {
-            animator.SetTrigger("damage");
+            // neu la skill dac biet gay damage thi se chac chan goi anim getHit(nhu bi lam choang)
+            if (isSkillDamage)
+            {
+                animator.SetTrigger("damage");
+            }
+            else if (Random.value < getHitChance)
+            {
+                animator.SetTrigger("damage");
+            }
             ChangeHealthBar();
         }
     }
@@ -46,6 +56,11 @@ public abstract class Health : MonoBehaviour
             hp = (int)healthBar.maxValue;
         }
         ChangeHealthBar();
+        if (healAmount > 0)
+        {
+            healEffect.SetActive(false);
+            healEffect.SetActive(true);
+        }
     }
 
     public virtual void ChangeHealthBar()

@@ -15,8 +15,8 @@ public class AudioManager : MonoBehaviour
  
     private void OnEnable()
     {
-        float musicVolume = PlayerPrefs.GetFloat("Music_Volume");
-        float sfxVolume = PlayerPrefs.GetFloat("SFX_Volume");
+        float musicVolume = PlayerPrefs.GetFloat("Music_Volume", 0.5f);
+        float sfxVolume = PlayerPrefs.GetFloat("SFX_Volume", 1);
         musicBar.value = musicVolume;
         sfxBar.value = sfxVolume;
         PlayMusic(0);

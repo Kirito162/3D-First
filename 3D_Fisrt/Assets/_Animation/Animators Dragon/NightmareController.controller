@@ -145,7 +145,7 @@ MonoBehaviour:
   - ClawAttack
   - BasicAttack
   - HornAttack
-  timeDelayAttack: 0.5
+  timeDelayAttack: 0
 --- !u!1101 &-4340690730131608481
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
